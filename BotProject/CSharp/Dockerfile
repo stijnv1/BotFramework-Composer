@@ -17,6 +17,7 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:2.1-alpine AS runtime
 RUN addgroup -g 1000 dotnetcoregroup \
     && adduser -u 1000 -G dotnetcoregroup -s /bin/sh dotnetcoreuser
 USER 1000
+ENV ASPNETCORE_URLS=http://*:5000
 WORKDIR /app/botproject/csharp
 COPY --from=build /src/botproject/csharp/ComposerDialogs ./ComposerDialogs
 COPY --from=build /src/botproject/csharp/out .
