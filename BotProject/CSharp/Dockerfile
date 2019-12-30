@@ -1,5 +1,7 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:2.1-alpine AS build
-
+RUN addgroup -g 1000 dotnetcoregroup \
+    && adduser -D -u 1000 -G dotnetcoregroup -s /bin/sh dotnetcoreuser
+USER 1000
 WORKDIR /src/botproject/csharp
 
 COPY *.sln .
