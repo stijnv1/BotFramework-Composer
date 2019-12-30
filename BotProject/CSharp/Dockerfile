@@ -14,8 +14,8 @@ COPY . .
 RUN dotnet publish -o out
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.1-alpine AS runtime
-RUN groupadd -g 1000 dotnetcoregroup \
-    && useradd -u 1000 -g dotnetcoregroup -s /bin/sh dotnetcoreuser
+RUN addgroup -g 1000 dotnetcoregroup \
+    && adduser -u 1000 -g dotnetcoregroup -s /bin/sh dotnetcoreuser
 USER 1000
 WORKDIR /app/botproject/csharp
 COPY --from=build /src/botproject/csharp/ComposerDialogs ./ComposerDialogs
